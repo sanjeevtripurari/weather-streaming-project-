@@ -255,5 +255,6 @@ docker exec kafka1 kafka-consumer-groups --bootstrap-server localhost:9092 --des
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).#   w e a t h e r - s t r e a m i n g - p r o j e c t -  
+This project is open source and available under the [MIT License](LICENSE).#   w e a t h e r - s t r e a m i n g - p r o j e c t - 
+ 
  
