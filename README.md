@@ -80,6 +80,7 @@ docker-compose logs -f
 
 ### Prerequisites
 - Docker and Docker Compose installed
+- Git (with proper line ending configuration)
 - 8GB+ RAM recommended for Kafka cluster
 - Ports 3000, 5432, 9092-9094, 2181 available
 
@@ -91,7 +92,17 @@ git clone <repository-url>
 cd weather-streaming-project
 ```
 
-2. **Start all services**
+2. **Configure Git for cross-platform development** (Important for Windows/Linux compatibility)
+```bash
+# On Linux/Mac
+chmod +x setup-git.sh
+./setup-git.sh
+
+# On Windows
+setup-git.bat
+```
+
+3. **Start all services**
 ```bash
 docker-compose up -d
 ```
@@ -253,7 +264,59 @@ docker exec kafka1 kafka-consumer-groups --bootstrap-server localhost:9092 --des
 - Add input validation and sanitization
 - Use environment variables for sensitive configuration
 
+## � Giit Configuration & Cross-Platform Development
+
+### Line Ending Handling
+This project uses LF (Unix-style) line endings for all text files to ensure consistency across Windows, Linux, and macOS.
+
+### Setup Git Configuration
+Run the appropriate setup script for your platform:
+
+**Linux/macOS:**
+```bash
+chmod +x setup-git.sh
+./setup-git.sh
+```
+
+**Windows:**
+```cmd
+setup-git.bat
+```
+
+### Manual Git Configuration
+If you prefer manual setup:
+
+```bash
+# Configure line endings (run once per repository)
+git config core.autocrlf false
+git config core.eol lf
+git config core.safecrlf true
+
+# Global configuration (run once per machine)
+git config --global core.autocrlf false
+git config --global core.eol lf
+```
+
+### Normalize Existing Files
+If you've already cloned the repository before configuring Git:
+
+```bash
+# Remove all files from Git index
+git rm --cached -r .
+
+# Re-add all files with proper line endings
+git add .
+
+# Commit the changes
+git commit -m "Normalize line endings"
+```
+
+### Files Included in Repository
+- `.gitignore` - Excludes build artifacts, dependencies, and OS-specific files
+- `.gitattributes` - Enforces LF line endings for text files
+- `setup-git.sh` - Git configuration script for Linux/macOS
+- `setup-git.bat` - Git configuration script for Windows
+
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).#   w e a t h e r - s t r e a m i n g - p r o j e c t -  
- 
+This project is open source and available under the [MIT License](LICENSE).
